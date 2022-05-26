@@ -1,0 +1,12 @@
+.cardDeck {
+    width: 150px;
+    height: 200px;
+    background: linear-gradient(135deg, orange, cyan);
+}
+
+.flexGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+}

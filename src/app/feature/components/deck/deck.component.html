@@ -1,0 +1,82 @@
+<div class="container-fluid" align="center">
+
+    <mat-stepper [linear]="true" #stepper>
+
+        <mat-step label="Choose Card" [completed]="(formValue.value.length>0) && (formSuit.value.length>0)">
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>Value</mat-label>
+                    <mat-select [formControl]="formValue">
+                        <mat-option disabled>Select Card Value</mat-option>
+                        <mat-option *ngFor="let x of cardValue" [value]="x" required>
+                            {{x}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>Suit</mat-label>
+                    <mat-select [formControl]="formSuit">
+                        <mat-option disabled>Select Card Suit</mat-option>
+                        <mat-option *ngFor="let x of cardSuit" [value]="x">
+                            {{x}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </p>
+            <div>
+                <button mat-stroked-button matStepperNext>Next</button>
+            </div>
+        </mat-step>
+
+        <mat-step label="Play Game" [completed]="finishGame">
+
+            <div>
+                <h1>{{formValue.value}} - {{formSuit.value}}</h1>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <mat-card class="cardDeck" (click)="getCardDetailForA()">
+                        <h1>{{remCard}}</h1>
+                    </mat-card>
+                </div>
+
+                <div class="col-3">
+                    <div *ngIf="drawCardA.length">
+                        <mat-card class="cardDeck">
+                            <img mat-card-image src="{{drawCardA[0].images.png}}" class="cardDeck"
+                                alt="Photo of a card">
+                        </mat-card>
+                    </div>
+                </div>
+
+                <div class="col-3">
+                    <mat-card class="cardDeck" (click)="getCardDetailForB()">
+                        <h1>{{remCard}}</h1>
+                    </mat-card>
+
+                </div>
+
+                <div class="col-3">
+                    <div *ngIf="drawCardB.length">
+                        <mat-card class="cardDeck">
+                            <img mat-card-image src="{{drawCardB[0].images.png}}" class="cardDeck"
+                                alt="Photo of a card">
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
+
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext [disabled]="!finishGame" mat-stroked-button>Next</button>
+        </mat-step>
+
+        <mat-step label="Stats">
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+            </div>
+        </mat-step>
+    </mat-stepper>
+
+</div>
